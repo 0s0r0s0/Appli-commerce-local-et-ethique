@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscription index{% endblock %}
+
+{% block body %}
+    <h1>Toutes commandes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Frequency</th>
+                <th>Price</th>
+                <th>Date_start</th>
+                <th>Date_end</th>
+                <th>Payé</th>
+                <th>Bonus</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ subscription.id }}</td>
+                <td>{{ subscription.quantity }}</td>
+                <td>{{ subscription.frequency }}</td>
+                <td>{{ subscription.price }}</td>
+                <td>{{ subscription.dateStart ? subscription.dateStart|date('Y-m-d') : '' }}</td>
+                <td>{{ subscription.dateEnd ? subscription.dateEnd|date('Y-m-d') : '' }}</td>
+                <td>{{ subscription.paid ? 'Oui' : 'Non' }}
+                    {% if not subscription.paid %}
+                        <input type="checkbox" id="{{ subscription.id }}">
+                    {% endif %}
+                </td>
+                <td>{{ subscription.bonus }}</td>
+                <td>
+                    <a href="{{ path('subscription_show', {'id': subscription.id}) }}">show</a>
+                    <a href="{{ path('subscription_edit', {'id': subscription.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucune commande n'a été effectué pour le moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('controle_paiements') }}"> Valider les paiements</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier vos informations:{% endblock %}
+
+{% block body %}
+    <h1>Modifier vos informations</h1>
+
+    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+{% endblock %}

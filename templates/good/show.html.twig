@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Good{% endblock %}
+
+{% block body %}
+    <h1>Good</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ good.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ good.description }}</td>
+            </tr>
+            <tr>
+                <th>Buying_minimum</th>
+                <td>{{ good.buyingMinimum }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ good.image }}</td>
+            </tr>
+            <tr>
+                <th>Stock</th>
+                <td>{{ good.stock }}</td>
+            </tr>
+            <tr>
+                <th>Label</th>
+                <td>{{ good.label }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('good_index') }}">back to list</a>
+
+    <a href="{{ path('good_edit', {'id': good.id}) }}">edit</a>
+
+    {{ include('good/_delete_form.html.twig') }}
+{% endblock %}

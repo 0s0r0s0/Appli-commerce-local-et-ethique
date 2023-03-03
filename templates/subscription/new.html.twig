@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle commande{% endblock %}
+
+{% block body %}
+    {{ include('/home/_menu.html.twig') }}
+
+    <h1>Passez votre commande</h1>
+
+    <div>
+        prix d'un panier de légumes : <span id="prixPanier">{{ tarif.price }}</span> €
+    </div>
+    <div>
+        {% set deliveryTotal = tarif.price / 100 * tarif.deliveryTax%}
+        frais de livraisons : <span id="prixLivraison">{{ deliveryTotal }}</span>  €
+    </div>
+
+    <div>
+        Prix total de votre panier par semaine : <span id="prixTotalSemaine">{{ tarif.price + deliveryTotal }}</span> €
+    </div>
+
+    <h2> Commande pour <span id="semaines">{{ paniers }}</span> semaines pour la période {{ trimester.label }} se terminant le {{ trimester.dateEnd|date("d/m/Y")}}</h2>
+
+
+    {{ include('subscription/_form.html.twig') }}
+
+    <div>
+        <span id="prixHT"></span>
+        <span id="taxe"></span>
+        <span id="prixTTC"></span>
+    </div>
+
+
+    <a href="{{ path('subscription_index') }}">back to list</a>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        function CalculatePanier() {
+
+            let quantity = document.getElementById('quantity').valueAsNumber;
+            let semaines = document.getElementById('semaines').innerText;
+            let prixPanier = document.getElementById('prixPanier').innerText;
+            let prixLivraison = document.getElementById('prixLivraison').innerText;
+
+            let ht = quantity * prixPanier;
+            let taxe = quantity * prixLivraison;
+            let ttc = ht + taxe;
+
+            document.getElementById('prixHT').innerHTML = 'Vous avez commandés pour ' + semaines * ht + ' €';
+            document.getElementById('taxe').innerHTML = semaines * taxe + ' € en frais de livraisons';
+            document.getElementById('prixTTC').innerHTML = 'Prix TTC ' + semaines * ttc + ' €';
+        }
+
+
+    </script>
+
+{% endblock %}

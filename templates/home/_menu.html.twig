@@ -1,0 +1,85 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Accueil</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+
+            <li>
+                <a class="nav-link" href="{{ path('charte') }}">Notre charte</a>
+            </li>
+            {% if is_granted('ROLE_USER') %}
+                <li>
+                    <a class="nav-link" href="#">Les produits</a>
+                </li>
+                {% endif %}
+            {% if is_granted('ROLE_PRODUCER') %}
+                <li>
+                    <a class="nav-link" href="#">Mes produits</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#">Mes factures</a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                <li>
+                    <a class="nav-link" href="{{ path('producer_index') }}">Les producteurs</a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Clients</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Factures</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Livraisons</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Bonus/Malus</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Tarif/Taxe</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Statistiques</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('stats') }}">Association</a>
+                    </li>
+
+                {% else %}
+                    <li>
+                        <a class="nav-link" href="{{ path('profile') }}">Mon profil</a>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a class="nav-link" href="{{ path('subscription_myorders') }}">Mes commandes</a>
+                    </li>
+                    <a class="nav-link btn btn-success text-white mr-2" type="button" href="{{ path('subscription_new') }}">Je commande !</a>
+                {% endif %}
+                <li class="nav-item mr-sm-2">
+                    <a class="nav-link btn btn-danger text-white ml-1" type="button" href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+
+            {% else %}
+                <li class="nav-item mr-sm-2">
+                    <a class="nav-link btn btn-success text-white" type="button" href="{{ path('user_new') }}">S'inscrire</a>
+                </li>
+                <li class="nav-item mr-sm-2 ">
+                    <a class="nav-link btn btn-primary text-white" type="button" href="{{ path('login') }}">Se Connecter</a>
+                </li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>
+{# <img src="{{ asset('images/bg.jpg')}}" class="img-fluid" alt="" /> #}

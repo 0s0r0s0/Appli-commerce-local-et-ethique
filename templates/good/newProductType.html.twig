@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau type de produit{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un type de produit</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group col-md-4">{{ form_row(form.label, { 'attr': {'placeholder': 'Ajoutez un nouveau type de produit'} }) }}</div>
+    <div><button class="btn-sm btn-outline-success">{{ button_label|default('Enregistrer') }}</button>
+        <a class="btn-sm btn-danger text-white" type="button" href="{{ path('good_new') }}">Retour</a>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

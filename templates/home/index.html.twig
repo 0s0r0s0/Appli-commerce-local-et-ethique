@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    {{ include('home/_menu.html.twig') }}
+    <div class="ml-4">
+        <h1 class="main-title ml-5 mt-5 mb-5">Bienvenue sur EkoLocal </h1>
+
+        {% if is_granted("ROLE_ADMIN") %}
+            Hi {{ app.user.username }} Dieu est parmis nous
+        {% endif %}
+        {% if is_granted("ROLE_USER") %}
+            Hi {{ app.user.profile.firstName }}!
+
+        {% endif %}
+        {% if is_granted("ROLE_PRODUCER") %}
+            Hi {{ app.user.username }}! Bienvenue à toi producteur!
+        {% endif %}
+
+        {% if is_granted ("ROLE_PRODUCER") and prodProfile is null  %}
+            <p>Vous n'avez pas rempli votre profil producteur!</p>
+            <li class="nav-item mr-sm-2">
+                <a class="nav-link btn btn-success text-white" type="button" href="{{ path('producer_new') }}">Devenir Producteur!</a>
+            </li>
+        {% endif %}
+
+        <h2> Trouvez les producteurs près de chez vous</h2>
+
+        <p>Il y a {{ producers }} producteurs et {{ goods }} produits différents ce {{ "now"|date("d/m/Y", "Europe/Paris") }}</p>
+    </div>
+{% endblock %}

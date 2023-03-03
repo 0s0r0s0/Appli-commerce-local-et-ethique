@@ -1,0 +1,32 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}})}}
+<div class="form-row col-8">
+    <div class="form-group col-md-3">{{ form_row(form.email, { 'attr': {'placeholder': 'email@info.fr'} }) }}</div>
+    <div class="form-group col-md-3">{{ form_row(form.password, { 'attr': {'placeholder': '*******'} }) }}</div>
+    <div class="form-group col-md-3">{{ form_row(form.passwordConfirm, { 'attr': {'placeholder': '*******'} }) }}</div>
+
+    {% for message in app.flashes('erreur') %}
+        <div class="flash-erreur form-group text-danger ml-5 font-weight-bolder">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.trade_area) }}</div>
+    <div class="form-group col-md-4">{{ form_row(form.role) }}</div>
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.profile.first_name, { 'attr': {'placeholder': 'Paul'} }) }}</div>
+    <div class="form-group col-md-4">{{ form_row(form.profile.last_name, { 'attr': {'placeholder': 'Dupont'} }) }}</div>
+</div>
+<div class="form-group col-6">
+    {{ form_row(form.profile.adress, { 'attr': {'placeholder': '1 Avenue du Canigou'} }) }}
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-3">{{ form_row(form.profile.city, { 'attr': {'placeholder': 'Perpignan'} }) }}</div>
+    <div class="form-group col-md-3">{{ form_row(form.profile.postal_code, { 'attr': {'placeholder': '66000'} }) }}</div>
+    <div class="form-group col-md-3">{{ form_row(form.profile.phone, { 'attr': {'placeholder': '0468666666'} }) }}</div>
+</div>
+    <button class="btn btn-primary col-3 ml-3">{{ button_label|default('Valider!') }}</button>
+{{ form_end(form) }}
+

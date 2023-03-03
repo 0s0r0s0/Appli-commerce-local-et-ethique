@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos informations:{% endblock %}
+
+{% block body %}
+    {{ include('home/_menu.html.twig') }}
+    <h1>Votre profil:</h1>
+
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>Prénom</th>
+            <td>{{ profile.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ profile.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Téléphone</th>
+            <td>{{ profile.phone }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ profile.adress }}</td>
+        </tr>
+        <tr>
+            <th>Code Postal</th>
+            <td>{{ profile.postalCode }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ profile.city }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('profile_edit', {'id': profile.id}) }}">Modifier des informations</a>
+
+{% endblock %}

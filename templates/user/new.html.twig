@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'enregistrer{% endblock %}
+
+{% block body %}
+    {{ include('home/_menu.html.twig') }}
+
+    <h1 class="ml-4 mt-2 mb-4">Créez votre compte</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+{% endblock %}

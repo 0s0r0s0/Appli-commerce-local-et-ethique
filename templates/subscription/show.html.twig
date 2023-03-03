@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscription{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-2">
+
+        <div class="row">
+            <div class="col-8">
+                <div id="nomAsso" style="font-weight: bolder; font-size: x-large">{{ asso.assoName }}</div>
+                <div id="adresseAsso">{{ asso.assoAdress }}</div>
+                <div id="villeAsso" style="font-weight: lighter">{{ asso.assoPostalCode }} {{ asso.assoCity }}</div>
+                <div id="telAsso" style="font-weight: lighter">{{ asso.phoneNumber }}</div>
+                <div id="mailAsso" style="font-weight: lighter">{{ asso.email }}</div>
+            </div>
+            <div class="col-4 ">
+                <span id="noFacture" style="font-weight: bold; font-size: larger">Facture n° {{ facture.reference }} </span>
+            </div>
+        </div>
+
+        <div class="row mt-4 ml-1">
+            <div class="col-3" style="font-weight: bold; background-color: #7DA0B1">
+                <div class="row mt-2">
+                    <div class="ml-2">
+                        <div id="dateFacture">Date de facture : </div>
+                        <div id="refFacture">Réf. de facture : </div>
+                        <div id="paiementFacture">Paiement dû : </div>
+                    </div>
+                    <div class="ml-2">
+                        <div id="dateFacture">{{ facture.date|date('d/m/Y') }} </div>
+                        <div id="refFacture">{{ facture.reference }}</div>
+                        <div id="paiementFacture">{{ facture.date|date('d/m/Y') }}</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-3"></div>
+            <div class="col-5 mt-2 mb-2">
+                <div id="destinataire" style="font-weight: bold"> Destinataire :</div>
+                <div id="nomDestinataire"> {{ subscription.user.profile.firstName}} {{ subscription.user.profile.lastName}} </div>
+                <div id=adresseDestinataire"> {{ subscription.user.profile.adress }} </div>
+                <div id="villeDestinataire">{{ subscription.user.profile.postalCode }} {{ subscription.user.profile.city }}</div>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered mt-4">
+            <thead>
+            <tr style="text-align: center">
+                <th scope="col" >Quantité</th>
+                <th scope="col">Description</th>
+                <th scope="col">Prix unitaire HT</th>
+                <th scope="col">Prix unitaire TTC</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row" style="text-align: center">{{ facture.quantity }}</th>
+                <td style="text-align: center">{{ facture.description }}</td>
+                <td style="text-align: right">{{ (panier.price /(1+(facture.tva/100)))|round(2,'common') }} €</td>
+                <td style="text-align: right">{{ panier.price }} €</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <table class="table table-bordered table-striped col-2 offset-md-8">
+        <tr>
+            <th>Total Hors Taxe</th>
+            <th style="font-weight: normal; text-align: right">{{ facture.priceHt}} €</th>
+        </tr>
+        <tr>
+            <th>TVA à {{ facture.tva}} %</th>
+            <th style="font-weight: normal; text-align: right">{{ facture.priceTtc - facture.priceHt}} €</th>
+        </tr>
+        <tr>
+            <th>Livraison</th>
+            <th style="font-weight: normal; text-align: right">{{ facture.deliveryTax}} €</th>
+        </tr>
+        <tr>
+            <th>Total TTC en euros</th>
+            <th style="text-align: right">{{ facture.priceTtc}} €</th>
+        </tr>
+    </table>
+
+
+
+
+    <div id="footer" class="container">
+        <div class="row">
+            <div class="mr-2 font-weight-bold">
+                <div class="">SIRET</div>
+                <div class="">N° TVA intracom</div>
+            </div>
+            <div class="ml-2">
+                <div class="">{{ asso.siret }}</div>
+                <div class="">{{ asso.tvaIntracom }}</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <a class=" btn btn-success text-white ml-4" type="button" href="{{ path('home') }}">Retour</a>
+
+
+{% endblock %}

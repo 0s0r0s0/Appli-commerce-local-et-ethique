@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Producteur{% endblock %}
+
+{% block body %}
+    <h1>Créer votre page producteur/h1>
+
+    {{ include('producer/_form.html.twig') }}
+
+    <a href="{{ path('producer_index') }}">Retour</a>
+{% endblock %}

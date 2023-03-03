@@ -1,0 +1,16 @@
+
+{{ form_start(form) }}
+<div class="form-row col-8">
+
+</div>
+
+<label> Choisissez la quantité de paniers hebdomadaires souhaités</label>
+<input type="number" id="quantity" name="quantity" min="1" value="1" onchange="CalculatePanier()">
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+
+
+
+    {{ form_end(form) }}
+
+

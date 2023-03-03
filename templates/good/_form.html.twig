@@ -1,0 +1,27 @@
+
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}})}}
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.label, { 'attr': {'placeholder': 'Nom du produit'} }) }}</div>
+    <div class="form-group col-md-4">{{ form_row(form.goods_type) }}
+        <span>Vous ne trouvez pas le bon type? <a class="btn btn-success text-white" type="button" href="{{ path('good_newProductType') }}">Ajoutez le!</a></span>
+    </div>
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.rate.price ) }}</div>
+        <div class="form-group col-md-4">{{ form_row(form.rate.unitType ) }}
+        <span>Vous ne trouvez pas la bonne unité? <a class="btn btn-success text-white" type="button" href="{{ path('good_newUnit') }}">Ajoutez le!</a></span>
+    </div>
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.description, { 'attr': {'placeholder': 'Ajoutez une courte description (facultatif)'} }) }}</div>
+    <div class="form-group col-md-4">{{ form_row(form.imageFile, {'attr': {'placeholder': 'Ajoutez une image (facultatif'}}) }}</div>
+</div>
+<div class="form-row col-8">
+    <div class="form-group col-md-4">{{ form_row(form.labelled_type ) }}
+        <span>Vous ne trouvez pas le bon label? <a class="btn btn-success text-white" type="button" href="{{ path('good_newLabel') }}">Ajoutez le!</a></span>
+    </div>
+</div>
+
+<div><button class="btn-sm btn-outline-success">{{ button_label|default('Enregistrer') }}</button></div>
+
+{{ form_end(form) }}
